@@ -39,11 +39,11 @@ export default {
       const regexToken = /(?:#access_token=)(?<accessToken>.+?)(?:&.*)/;
       const tokenMatch = regexToken.exec(this.$route.hash);
       this.$store.commit('setAccessToken', tokenMatch.groups.accessToken);
-      if (this.accessToken) {
-        this.$router.replace('');
-        await this.$store.dispatch('fetchUserProfile');
-        this.isProfileLoading = false;
-      }
+      this.$router.replace('');
+    }
+    if (this.accessToken) {
+      await this.$store.dispatch('fetchUserProfile');
+      this.isProfileLoading = false;
     }
   },
   data: () => ({
