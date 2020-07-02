@@ -41,14 +41,15 @@ export default {
       this.$store.commit('setAccessToken', tokenMatch.groups.accessToken);
       this.$router.replace('');
     }
-    if (this.accessToken) {
+    if (this.accessToken && !this.userProfile) {
+      this.isProfileLoading = true;
       await this.$store.dispatch('fetchUserProfile');
       this.isProfileLoading = false;
     }
   },
   data: () => ({
     clientId: process.env.VUE_APP_CLIENT_ID,
-    isProfileLoading: true,
+    isProfileLoading: false,
   }),
   computed: {
     accessToken() {
