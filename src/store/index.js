@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 
 const SPOTIFY_URI = "https://api.spotify.com/v1/me";
 
@@ -43,8 +44,9 @@ export default new Vuex.Store({
         }
       });
       commit("setTopTracks", response.data);
-      return response.data;
+      return response;
     }
   },
-  modules: {}
+  modules: {},
+  plugins: [createPersistedState("accessToken", "userProfile")]
 });
