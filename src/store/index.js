@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     accessToken: "",
     userProfile: {},
-    topTracks: {}
+    topTracks: []
   },
   mutations: {
     setAccessToken(state, token) {
@@ -44,7 +44,7 @@ export default new Vuex.Store({
           Authorization: `Bearer ${state.accessToken}`
         }
       });
-      commit("setTopTracks", response.data);
+      commit("setTopTracks", response.data.items);
       return response;
     }
   },
