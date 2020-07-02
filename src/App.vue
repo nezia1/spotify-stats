@@ -6,7 +6,7 @@
       <v-btn
         v-if="!spotifyToken"
         color="primary"
-        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-read-email&redirect_uri=http://localhost:8080`"
+        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read user-read-email&redirect_uri=http://localhost:8080`"
       >
         <v-icon left>mdi-spotify</v-icon>Login with Spotify
       </v-btn>
@@ -52,19 +52,29 @@ export default {
     clientId: process.env.VUE_APP_CLIENT_ID,
     userProfile: {},
     isProfileLoading: true,
+    topTracks: {},
+    topArtists: {},
   }),
   methods: {
     logout() {
       this.spotifyToken = '';
     },
     async fetchUserProfile() {
-      const profile = await axios.get('https://api.spotify.com/v1/me', {
+      const response = await axios.get('https://api.spotify.com/v1/me', {
         headers: {
           Authorization: `Bearer ${this.spotifyToken}`,
         },
       });
       this.isProfileLoading = false;
-      return profile.data;
+      return response.data;
+    },
+    async fetchTopTracks(limit = 50) {
+      const response = await axios.get(`https://api.spotify.com/v1/me/top/tracks?limit=${limit}`, {
+        headers: {
+          Authorization: `Bearer ${this.spotifyToken}`,
+        },
+      });
+      return response.data;
     },
   },
 };
