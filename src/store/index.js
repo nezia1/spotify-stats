@@ -67,5 +67,5 @@ export default new Vuex.Store({
     }
   },
   modules: {},
-  plugins: [createPersistedState("accessToken", "userProfile")]
+  plugins: [createPersistedState("accessToken")]
 });
