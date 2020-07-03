@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import createPersistedState from "vuex-persistedstate";
 
 const SPOTIFY_URI = "https://api.spotify.com/v1/me";
 
@@ -66,6 +65,5 @@ export default new Vuex.Store({
       return response;
     }
   },
-  modules: {},
-  plugins: [createPersistedState("accessToken")]
+  modules: {}
 });

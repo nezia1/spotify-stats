@@ -42,7 +42,6 @@ export default {
       this.$router.replace('');
     }
     if (this.accessToken) {
-      console.log('Access token! App');
       this.isProfileLoading = true;
       await this.$store.dispatch('fetchUserProfile');
       this.isProfileLoading = false;

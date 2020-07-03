@@ -58,7 +58,6 @@ export default {
   name: 'HelloWorld',
   async created() {
     if (this.accessToken) {
-      console.log('Access token! - HelloWorld');
       await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
       await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
     }
