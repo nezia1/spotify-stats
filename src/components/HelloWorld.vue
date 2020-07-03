@@ -71,7 +71,7 @@ export default {
     formattedArtistNames(artists) {
       return artists.map((artist) => {
         return artist.name
-      }).join(' ft. ')
+      }).join(', ')
     }
   }
 };
