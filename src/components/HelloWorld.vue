@@ -57,7 +57,7 @@
 export default {
   name: 'HelloWorld',
   async created() {
-    if (this.$store.state.accessToken) {
+    if (this.accessToken) {
       console.log('Access token! - HelloWorld');
       await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
       await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
@@ -68,7 +68,10 @@ export default {
       return this.$store.state.topTracksCurrent;
     },
     topTracksAllTime() {
-      return this.$store.state.topTracksAllTime
+      return this.$store.state.topTracksAllTime;
+    },
+    accessToken() {
+      return this.$store.state.accessToken;
     }
   },
   methods: {
