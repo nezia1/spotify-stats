@@ -41,7 +41,8 @@ export default {
       this.$store.commit('setAccessToken', tokenMatch.groups.accessToken);
       this.$router.replace('');
     }
-    if (this.accessToken && !this.userProfile) {
+    if (this.accessToken) {
+      console.log('Access token! App');
       this.isProfileLoading = true;
       await this.$store.dispatch('fetchUserProfile');
       this.isProfileLoading = false;
