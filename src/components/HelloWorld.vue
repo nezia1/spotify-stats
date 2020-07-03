@@ -10,7 +10,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-col v-for="topTrack in topTracks" :key="topTrack.id">
+        <v-col v-for="topTrack in topTracksCurrent" :key="topTrack.id">
           <v-card color="cyan darken-2" class="white--text" height="100%">
             <v-row fill-height align-center>
               <v-col cols="5" height="100%">
@@ -30,7 +30,7 @@
         </v-col>
       </v-col>
       <v-col>
-        <v-col v-for="topTrack in topTracks" :key="topTrack.id">
+        <v-col v-for="topTrack in topTracksAllTime" :key="topTrack.id">
           <v-card color="cyan darken-2" class="white--text" height="100%">
             <v-row fill-height align-center>
               <v-col cols="5" height="100%">
@@ -58,13 +58,16 @@ export default {
   name: 'HelloWorld',
   async created() {
     if (this.$store.state.accessToken) {
-      await this.$store.dispatch('fetchTopTracks', 20
-      );
+      await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
+      await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
     }
   },
   computed: {
-    topTracks() {
-      return this.$store.state.topTracks;
+    topTracksCurrent() {
+      return this.$store.state.topTracksCurrent;
+    },
+    topTracksAllTime() {
+      return this.$store.state.topTracksAllTime
     }
   },
   methods: {

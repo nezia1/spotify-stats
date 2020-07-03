@@ -11,7 +11,8 @@ export default new Vuex.Store({
   state: {
     accessToken: "",
     userProfile: {},
-    topTracks: []
+    topTracksCurrent: [],
+    topTracksAllTime: []
   },
   mutations: {
     setAccessToken(state, token) {
@@ -20,8 +21,11 @@ export default new Vuex.Store({
     setUserProfile(state, userProfile) {
       state.userProfile = userProfile;
     },
-    setTopTracks(state, topTracks) {
-      state.topTracks = topTracks;
+    setTopTracksCurrent(state, topTracks) {
+      state.topTracksCurrent = topTracks;
+    },
+    setTopTracksAllTime(state, topTracks) {
+      state.topTracksAllTime = topTracks;
     },
     logout(state) {
       state.accessToken = "";
@@ -39,13 +43,25 @@ export default new Vuex.Store({
       commit("setUserProfile", response.data);
       return response;
     },
-    async fetchTopTracks({ commit, state }, limit = 50) {
-      const response = await axios.get(`${SPOTIFY_URI}/top/tracks?limit=${limit}`, {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`
+    async fetchTopTracks({ commit, state }, { limit = 20, timeRange = "medium_term" }) {
+      const response = await axios.get(
+        `${SPOTIFY_URI}/top/tracks?limit=${limit}&time_range=${timeRange}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.accessToken}`
+          }
         }
-      });
-      commit("setTopTracks", response.data.items);
+      );
+      switch (timeRange) {
+        case "short_term":
+          commit("setTopTracksCurrent", response.data.items);
+          break;
+        case "long_term":
+          commit("setTopTracksAllTime", response.data.items);
+          break;
+        default:
+          break;
+      }
       return response;
     }
   },
