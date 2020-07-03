@@ -1,37 +1,54 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-card
-        color="cyan darken-2"
-        class="white--text"
-        v-for="topTrack in topTracks"
-        :key="topTrack.id"
-      >
-        <v-layout>
-          <v-flex xs5>
-            <v-img src="https://cdn.vuetifyjs.com/images/cards/foster.jpg" height="125px" contain></v-img>
-          </v-flex>
-          <v-flex xs7>
-            <v-card-title primary-title>
-              <div>
-                <div class="headline">{{topTrack.name}}</div>
-                <div>{{formattedArtistNames(topTrack.artists)}}</div>
-                <div>(2014)</div>
-              </div>
-            </v-card-title>
-          </v-flex>
-        </v-layout>
-        <v-divider light></v-divider>
-        <v-card-actions class="pa-3">
-          Rate this album
-          <v-spacer></v-spacer>
-          <v-icon>mdi-star</v-icon>
-          <v-icon>mdi-star</v-icon>
-          <v-icon>mdi-star</v-icon>
-          <v-icon>mdi-star</v-icon>
-          <v-icon>mdi-star</v-icon>
-        </v-card-actions>
-      </v-card>
+  <v-container grid-list-md>
+    <v-row>
+      <v-col class="text-center">
+        <h1>Current</h1>
+      </v-col>
+      <v-col class="text-center">
+        <h1>All time</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-col v-for="topTrack in topTracks" :key="topTrack.id">
+          <v-card color="cyan darken-2" class="white--text" height="100%">
+            <v-row fill-height align-center>
+              <v-col cols="5" height="100%">
+                <v-img :src="topTrack.album.images[0].url" height="125px" contain></v-img>
+              </v-col>
+              <v-col cols="7">
+                <v-card-title primary-title class="text-left">
+                  <div>
+                    <div class="headline">{{topTrack.name}}</div>
+                    <div>{{formattedArtistNames(topTrack.artists)}}</div>
+                    <div>{{topTrack.album.release_date.split('-')[0]}}</div>
+                  </div>
+                </v-card-title>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-col>
+      <v-col>
+        <v-col v-for="topTrack in topTracks" :key="topTrack.id">
+          <v-card color="cyan darken-2" class="white--text" height="100%">
+            <v-row fill-height align-center>
+              <v-col cols="5" height="100%">
+                <v-img :src="topTrack.album.images[0].url" height="125px" contain></v-img>
+              </v-col>
+              <v-col cols="7">
+                <v-card-title primary-title class="text-left">
+                  <div>
+                    <div class="headline">{{topTrack.name}}</div>
+                    <div>{{formattedArtistNames(topTrack.artists)}}</div>
+                    <div>{{topTrack.album.release_date.split('-')[0]}}</div>
+                  </div>
+                </v-card-title>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -40,7 +57,10 @@
 export default {
   name: 'HelloWorld',
   async created() {
-    await this.$store.dispatch('fetchTopTracks', 20);
+    if (this.$store.state.accessToken) {
+      await this.$store.dispatch('fetchTopTracks', 20
+      );
+    }
   },
   computed: {
     topTracks() {
