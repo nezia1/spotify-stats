@@ -6,7 +6,7 @@
       <v-btn
         v-if="!accessToken"
         color="primary"
-        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read&redirect_uri=http://localhost:8080`"
+        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read&redirect_uri=${callbackUrl}`"
       >
         <v-icon left>mdi-spotify</v-icon>Login with Spotify
       </v-btn>
@@ -57,6 +57,9 @@ export default {
     },
     userProfile() {
       return this.$store.state.userProfile;
+    },
+    callbackUrl() {
+      return process.env.NODE_ENV === 'production' ? 'https://charts.nezia.xyz' : 'http://localhost:8080';
     }
   },
 };

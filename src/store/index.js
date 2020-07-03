@@ -30,7 +30,8 @@ export default new Vuex.Store({
     logout(state) {
       state.accessToken = "";
       state.userProfile = "";
-      state.topTracks = "";
+      state.topTracksCurrent = [];
+      state.topTracksAllTime = [];
     }
   },
   actions: {
