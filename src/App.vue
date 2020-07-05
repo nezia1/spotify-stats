@@ -18,7 +18,7 @@
         </v-skeleton-loader>
 
         <h3 class="mr-5 font-weight-regular">Welcome, {{userProfile.display_name}}</h3>
-        <v-btn color="primary" v-on:click="$store.commit('logout')">
+        <v-btn color="primary" v-on:click="logout">
           <v-icon left>mdi-logout</v-icon>Logout
         </v-btn>
       </v-row>
@@ -39,7 +39,7 @@ export default {
       const regexToken = /(?:#access_token=)(?<accessToken>.+?)(?:&.*)/;
       const tokenMatch = regexToken.exec(this.$route.hash);
       this.$store.commit('setAccessToken', tokenMatch.groups.accessToken);
-      this.$router.replace('');
+      this.$router.replace('/stats');
     }
     if (this.accessToken) {
       this.isProfileLoading = true;
@@ -51,6 +51,12 @@ export default {
     clientId: process.env.VUE_APP_CLIENT_ID,
     isProfileLoading: false,
   }),
+  methods: {
+    logout() {
+      this.$store.commit('logout');
+      this.$router.replace('/');
+    }
+  },
   computed: {
     accessToken() {
       return this.$store.state.accessToken;

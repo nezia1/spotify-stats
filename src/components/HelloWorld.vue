@@ -56,10 +56,9 @@
 <script>
 export default {
   name: 'HelloWorld',
-  data() {
-    return {
-      isLoading: true
-    };
+  async mounted() {
+    await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
+    await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
   },
   computed: {
     topTracksCurrent() {
@@ -70,13 +69,6 @@ export default {
     },
     accessToken() {
       return this.$store.state.accessToken;
-    }
-  },
-  watch: {
-    async accessToken() {
-      await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
-      await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
-      this.isLoading = false;
     }
   },
   methods: {
