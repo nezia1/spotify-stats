@@ -59,7 +59,7 @@ export default {
       return this.$store.state.userProfile;
     },
     callbackUrl() {
-      return process.env.NODE_ENV === 'production' ? 'https://charts.nezia.xyz' : 'http://localhost:8080';
+      return process.env.NODE_ENV === 'production' ? 'https://stats.nezia.xyz' : 'http://localhost:8080';
     }
   },
 };
