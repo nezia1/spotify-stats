@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title>Spotify Charts</v-toolbar-title>
+      <v-toolbar-title>Spotify Stats</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         v-if="!accessToken"
