@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col class="text-center">
+    <v-row v-if="accessToken">
+      <v-col class="text-center" cols="12" md="6">
         <h1>Current</h1>
         <v-col v-for="topTrack in topTracksCurrent" :key="topTrack.id">
           <v-lazy>
@@ -26,7 +26,7 @@
           </v-lazy>
         </v-col>
       </v-col>
-      <v-col class="text-center">
+      <v-col class="text-center" cols="12" md="6">
         <h1>All time</h1>
         <v-col v-for="topTrack in topTracksAllTime" :key="topTrack.id">
           <v-lazy>
