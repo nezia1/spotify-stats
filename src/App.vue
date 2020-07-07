@@ -6,7 +6,7 @@
       <v-btn
         v-if="!accessToken"
         color="#1ED760"
-        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read&redirect_uri=${callbackUrl}`"
+        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read&redirect_uri=${callbackUrl}&show_dialog=true`"
       >
         <v-icon left>mdi-spotify</v-icon>Login with Spotify
       </v-btn>
