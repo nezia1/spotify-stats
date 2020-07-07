@@ -17,10 +17,8 @@
           </v-avatar>
         </v-skeleton-loader>
 
-        <h3 class="mr-5 font-weight-regular">Welcome, {{userProfile.display_name}}</h3>
-        <v-btn color="primary" v-on:click="logout">
-          <v-icon left>mdi-logout</v-icon>Logout
-        </v-btn>
+        <h3 class="mr-5 font-weight-regular">Welcome, {{ userProfile.display_name }}</h3>
+        <v-btn color="primary" v-on:click="logout"> <v-icon left>mdi-logout</v-icon>Logout </v-btn>
       </v-row>
     </v-app-bar>
 
@@ -55,7 +53,7 @@ export default {
     logout() {
       this.$store.commit('logout');
       this.$router.replace('/');
-    }
+    },
   },
   computed: {
     accessToken() {
@@ -65,8 +63,10 @@ export default {
       return this.$store.state.userProfile;
     },
     callbackUrl() {
-      return process.env.NODE_ENV === 'production' ? 'https://stats.nezia.xyz' : 'http://localhost:8080';
-    }
+      return process.env.NODE_ENV === 'production'
+        ? 'https://stats.nezia.xyz'
+        : 'http://localhost:8080';
+    },
   },
 };
 </script>
