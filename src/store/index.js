@@ -1,17 +1,17 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
-const SPOTIFY_URI = "https://api.spotify.com/v1/me";
+const SPOTIFY_URI = 'https://api.spotify.com/v1/me';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    accessToken: "",
+    accessToken: '',
     userProfile: {},
     topTracksCurrent: [],
-    topTracksAllTime: []
+    topTracksAllTime: [],
   },
   mutations: {
     setAccessToken(state, token) {
@@ -27,43 +27,41 @@ export default new Vuex.Store({
       state.topTracksAllTime = topTracks;
     },
     logout(state) {
-      state.accessToken = "";
-      state.userProfile = "";
+      state.accessToken = '';
+      state.userProfile = {};
       state.topTracksCurrent = [];
       state.topTracksAllTime = [];
-    }
+    },
   },
   actions: {
     async fetchUserProfile({ commit, state }) {
       const response = await axios.get(`${SPOTIFY_URI}`, {
         headers: {
-          Authorization: `Bearer ${state.accessToken}`
-        }
+          Authorization: `Bearer ${state.accessToken}`,
+        },
       });
-      commit("setUserProfile", response.data);
-      return response;
+      commit('setUserProfile', response.data);
     },
-    async fetchTopTracks({ commit, state }, { limit = 20, timeRange = "medium_term" }) {
+    async fetchTopTracks({ commit, state }, { limit = 20, timeRange = 'medium_term' }) {
       const response = await axios.get(
         `${SPOTIFY_URI}/top/tracks?limit=${limit}&time_range=${timeRange}`,
         {
           headers: {
-            Authorization: `Bearer ${state.accessToken}`
-          }
+            Authorization: `Bearer ${state.accessToken}`,
+          },
         }
       );
       switch (timeRange) {
-        case "short_term":
-          commit("setTopTracksCurrent", response.data.items);
+        case 'short_term':
+          commit('setTopTracksCurrent', response.data.items);
           break;
-        case "long_term":
-          commit("setTopTracksAllTime", response.data.items);
+        case 'long_term':
+          commit('setTopTracksAllTime', response.data.items);
           break;
         default:
           break;
       }
-      return response;
-    }
+    },
   },
-  modules: {}
+  modules: {},
 });
