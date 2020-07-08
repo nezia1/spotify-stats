@@ -7,9 +7,14 @@
         <v-icon left>mdi-spotify</v-icon>Login with Spotify
       </v-btn>
       <v-row v-else justify="end" align="center">
-        <v-skeleton-loader :loading="isProfileLoading" type="avatar" class="mr-3">
+        <v-skeleton-loader type="avatar" class="mr-3">
           <v-avatar size="40">
-            <img :src="userProfile.images[0].url" :alt="`User profile picture`" srcset />
+            <img
+              v-if="userProfile.images[0].url"
+              :src="userProfile.images[0].url"
+              :alt="`User profile picture`"
+              srcset
+            />
           </v-avatar>
         </v-skeleton-loader>
 
@@ -35,15 +40,8 @@ export default {
       this.$store.commit('setAccessToken', tokenMatch.groups.accessToken);
       this.$router.replace('/stats');
     }
-    if (this.accessToken) {
-      this.isProfileLoading = true;
-      await this.$store.dispatch('fetchUserProfile');
-      this.isProfileLoading = false;
-    }
   },
-  data: () => ({
-    isProfileLoading: false,
-  }),
+
   methods: {
     logout() {
       this.$store.commit('logout');
