@@ -10,7 +10,7 @@
         <v-skeleton-loader type="avatar" class="mr-3">
           <v-avatar size="40">
             <img
-              v-if="userProfile.images[0].url"
+              v-if="userAvatarExists(userProfile)"
               :src="userProfile.images[0].url"
               :alt="`User profile picture`"
               srcset
@@ -49,6 +49,9 @@ export default {
     },
     login() {
       window.location.href = `https://accounts.spotify.com/authorize?response_type=token&client_id=${this.clientId}&scope=user-read-private user-top-read&redirect_uri=${this.callbackUrl}&show_dialog=true`;
+    },
+    userAvatarExists(profile) {
+      return profile?.images?.length > 0 && profile.images[0].url;
     },
   },
   computed: {
