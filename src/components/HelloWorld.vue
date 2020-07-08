@@ -29,10 +29,6 @@ export default {
   components: {
     TopCard,
   },
-  async mounted() {
-    await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
-    await this.$store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
-  },
   computed: {
     topTracksCurrent() {
       return this.$store.state.topTracksCurrent;
