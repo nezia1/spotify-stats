@@ -3,11 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title>Spotify Stats</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        v-if="!accessToken"
-        color="#1ED760"
-        :href="`https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=user-read-private user-top-read&redirect_uri=${callbackUrl}&show_dialog=true`"
-      >
+      <v-btn v-if="!accessToken" color="#1ED760" :href="``" v-on:click="login">
         <v-icon left>mdi-spotify</v-icon>Login with Spotify
       </v-btn>
       <v-row v-else justify="end" align="center">
@@ -53,6 +49,9 @@ export default {
     logout() {
       this.$store.commit('logout');
       this.$router.replace('/');
+    },
+    login() {
+      window.location.href = `https://accounts.spotify.com/authorize?response_type=token&client_id=${this.clientId}&scope=user-read-private user-top-read&redirect_uri=${this.callbackUrl}&show_dialog=true`;
     },
   },
   computed: {
