@@ -42,7 +42,6 @@ export default {
     }
   },
   data: () => ({
-    clientId: process.env.VUE_APP_CLIENT_ID,
     isProfileLoading: false,
   }),
   methods: {
@@ -65,6 +64,9 @@ export default {
       return process.env.NODE_ENV === 'production'
         ? 'https://stats.nezia.xyz'
         : 'http://localhost:8080';
+    },
+    clientId() {
+      return process.env.VUE_APP_CLIENT_ID;
     },
   },
 };
