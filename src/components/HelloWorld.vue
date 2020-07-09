@@ -4,9 +4,9 @@
       <v-col cols="12">
         <v-row justify="center" align="center">
           <v-col class="text-center" style="user-select: none;">
-            <a class="text-h3 mr-5">Tracks</a>
+            <a class="text-h3 mr-5" v-on:click="switchCategory('tracks')">Tracks</a>
             <span class="text-h3">/</span>
-            <a class="text-h3 white--text ml-5">Artists</a>
+            <a class="text-h3 white--text ml-5" v-on:click="switchCategory('artists')">Artists</a>
           </v-col>
         </v-row>
       </v-col>
@@ -42,12 +42,28 @@ export default {
   components: {
     TopCard,
   },
+  data() {
+    return {
+      category: 'tracks',
+    };
+  },
+  methods: {
+    switchCategory(chosenCategory) {
+      this.category = chosenCategory;
+    },
+  },
   computed: {
     topTracksCurrent() {
       return this.$store.state.topTracksCurrent;
     },
     topTracksAllTime() {
       return this.$store.state.topTracksAllTime;
+    },
+    topArtistsCurrent() {
+      return this.$store.state.topArtistsCurrent;
+    },
+    topArtistsAllTime() {
+      return this.$store.state.topArtistsAllTime;
     },
     accessToken() {
       return this.$store.state.accessToken;

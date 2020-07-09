@@ -26,6 +26,8 @@ const routes = [
           store.dispatch('fetchUserProfile'),
           store.dispatch('fetchTop', { type: 'tracks', limit: 20, timeRange: 'short_term' }),
           store.dispatch('fetchTop', { type: 'tracks', limit: 20, timeRange: 'long_term' }),
+          store.dispatch('fetchTop', { type: 'artists', limit: 20, timeRange: 'short_term' }),
+          store.dispatch('fetchTop', { type: 'artists', limit: 20, timeRange: 'long_term' }),
         ]);
         next();
       }
