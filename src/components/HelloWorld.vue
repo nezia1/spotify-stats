@@ -4,9 +4,17 @@
       <v-col cols="12">
         <v-row justify="center" align="center">
           <v-col class="text-center" style="user-select: none;">
-            <a class="text-h3 mr-5" v-on:click="switchCategory('tracks')">Tracks</a>
+            <a
+              :class="`text-h3 mr-5 ${category === 'tracks' ? '' : 'white--text'}`"
+              v-on:click="switchCategory('tracks')"
+              >Tracks</a
+            >
             <span class="text-h3">/</span>
-            <a class="text-h3 white--text ml-5" v-on:click="switchCategory('artists')">Artists</a>
+            <a
+              :class="`text-h3 ml-5 ${category === 'artists' ? '' : 'white--text'} `"
+              v-on:click="switchCategory('artists')"
+              >Artists</a
+            >
           </v-col>
         </v-row>
       </v-col>
@@ -14,17 +22,31 @@
         <v-row>
           <v-col class="text-center" cols="12" md="6">
             <h1>Current</h1>
-            <v-col v-for="topTrack in topTracksCurrent" :key="topTrack.id">
+            <v-col
+              v-for="topTrack in category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
+              :key="topTrack.id"
+            >
               <v-lazy>
-                <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
+                <TopCard
+                  :element="topTrack"
+                  :isTrack="category === 'tracks'"
+                  cardColor="cyan darken-2"
+                />
               </v-lazy>
             </v-col>
           </v-col>
           <v-col class="text-center" cols="12" md="6">
             <h1>All time</h1>
-            <v-col v-for="topTrack in topTracksAllTime" :key="topTrack.id">
+            <v-col
+              v-for="topTrack in category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
+              :key="topTrack.id"
+            >
               <v-lazy>
-                <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
+                <TopCard
+                  :element="topTrack"
+                  :isTrack="category === 'tracks'"
+                  cardColor="cyan darken-2"
+                />
               </v-lazy>
             </v-col>
           </v-col>
