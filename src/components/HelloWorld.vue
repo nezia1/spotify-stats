@@ -1,21 +1,36 @@
 <template>
   <v-container>
     <v-row v-if="accessToken">
-      <v-col class="text-center" cols="12" md="6">
-        <h1>Current</h1>
-        <v-col v-for="topTrack in topTracksCurrent" :key="topTrack.id">
-          <v-lazy>
-            <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
-          </v-lazy>
-        </v-col>
+      <v-col cols="12">
+        <v-row justify="center" align="center">
+          <v-breadcrumbs
+            :items="[
+              { text: 'Tracks', disabled: false },
+              { text: 'Artists', disabled: true },
+            ]"
+            large
+          ></v-breadcrumbs>
+        </v-row>
       </v-col>
-      <v-col class="text-center" cols="12" md="6">
-        <h1>All time</h1>
-        <v-col v-for="topTrack in topTracksAllTime" :key="topTrack.id">
-          <v-lazy>
-            <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
-          </v-lazy>
-        </v-col>
+      <v-col cols="12">
+        <v-row>
+          <v-col class="text-center" cols="12" md="6">
+            <h1>Current</h1>
+            <v-col v-for="topTrack in topTracksCurrent" :key="topTrack.id">
+              <v-lazy>
+                <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
+              </v-lazy>
+            </v-col>
+          </v-col>
+          <v-col class="text-center" cols="12" md="6">
+            <h1>All time</h1>
+            <v-col v-for="topTrack in topTracksAllTime" :key="topTrack.id">
+              <v-lazy>
+                <TopCard :element="topTrack" :isTrack="true" cardColor="cyan darken-2" />
+              </v-lazy>
+            </v-col>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
