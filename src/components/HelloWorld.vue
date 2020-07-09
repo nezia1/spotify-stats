@@ -3,13 +3,11 @@
     <v-row v-if="accessToken">
       <v-col cols="12">
         <v-row justify="center" align="center">
-          <v-breadcrumbs
-            :items="[
-              { text: 'Tracks', disabled: false },
-              { text: 'Artists', disabled: true },
-            ]"
-            large
-          ></v-breadcrumbs>
+          <v-col class="text-center" style="user-select: none;">
+            <a class="text-h3 mr-5">Tracks</a>
+            <span class="text-h3">/</span>
+            <a class="text-h3 white--text ml-5">Artists</a>
+          </v-col>
         </v-row>
       </v-col>
       <v-col cols="12">
