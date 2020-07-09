@@ -22,9 +22,11 @@ const routes = [
       if (!store.state.accessToken) {
         next(false);
       } else {
-        await store.dispatch('fetchUserProfile');
-        await store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' });
-        await store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' });
+        await Promise.allSettled([
+          store.dispatch('fetchUserProfile'),
+          store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' }),
+          store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' }),
+        ]);
         next();
       }
     },
