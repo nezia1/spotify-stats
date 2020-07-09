@@ -24,8 +24,8 @@ const routes = [
       } else {
         await Promise.allSettled([
           store.dispatch('fetchUserProfile'),
-          store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'short_term' }),
-          store.dispatch('fetchTopTracks', { limit: 20, timeRange: 'long_term' }),
+          store.dispatch('fetchTop', { type: 'tracks', limit: 20, timeRange: 'short_term' }),
+          store.dispatch('fetchTop', { type: 'tracks', limit: 20, timeRange: 'long_term' }),
         ]);
         next();
       }

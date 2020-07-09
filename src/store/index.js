@@ -5,14 +5,15 @@ import axios from 'axios';
 const SPOTIFY_URI = 'https://api.spotify.com/v1/me';
 
 Vue.use(Vuex);
+const defaultState = {
+  accessToken: '',
+  userProfile: {},
+  topTracksCurrent: [],
+  topTracksAllTime: [],
+};
 
 export default new Vuex.Store({
-  state: {
-    accessToken: '',
-    userProfile: {},
-    topTracksCurrent: [],
-    topTracksAllTime: [],
-  },
+  state: { ...defaultState },
   mutations: {
     setAccessToken(state, token) {
       state.accessToken = token;
@@ -26,11 +27,14 @@ export default new Vuex.Store({
     setTopTracksAllTime(state, topTracks) {
       state.topTracksAllTime = topTracks;
     },
+    setTopArtistsCurrent(state, topArtists) {
+      state.topArtistsCurrent = topArtists;
+    },
+    setTopArtistsAllTime(state, topArtists) {
+      state.topArtistsAllTime = topArtists;
+    },
     logout(state) {
-      state.accessToken = '';
-      state.userProfile = {};
-      state.topTracksCurrent = [];
-      state.topTracksAllTime = [];
+      Object.assign(state, { ...defaultState });
     },
   },
   actions: {
@@ -42,24 +46,30 @@ export default new Vuex.Store({
       });
       commit('setUserProfile', response.data);
     },
-    async fetchTopTracks({ commit, state }, { limit = 20, timeRange = 'medium_term' }) {
+    async fetchTop({ commit, state }, { type, limit = 20, timeRange }) {
       const response = await axios.get(
-        `${SPOTIFY_URI}/top/tracks?limit=${limit}&time_range=${timeRange}`,
+        `${SPOTIFY_URI}/top/${type}?limit=${limit}&time_range=${timeRange}`,
         {
           headers: {
             Authorization: `Bearer ${state.accessToken}`,
           },
         }
       );
-      switch (timeRange) {
-        case 'short_term':
+      if (timeRange === 'short_term') {
+        if (type === 'tracks') {
           commit('setTopTracksCurrent', response.data.items);
-          break;
-        case 'long_term':
+        }
+        if (type === 'artists') {
+          commit('setTopArtistsCurrent', response.data.items);
+        }
+      }
+      if (timeRange === 'long_term') {
+        if (type === 'tracks') {
           commit('setTopTracksAllTime', response.data.items);
-          break;
-        default:
-          break;
+        }
+        if (type === 'artists') {
+          commit('setTopArtistsAllTime', response.data.items);
+        }
       }
     },
   },
