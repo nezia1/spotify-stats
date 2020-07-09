@@ -5,13 +5,13 @@
         <v-row justify="center" align="center">
           <v-col class="text-center" style="user-select: none;">
             <a
-              :class="`text-h3 mr-5 ${category === 'tracks' ? '' : 'white--text'}`"
+              :class="`text-h4 text-md-h3  mr-5 ${category === 'tracks' ? '' : 'white--text'}`"
               v-on:click="switchCategory('tracks')"
               >Tracks</a
             >
-            <span class="text-h3">/</span>
+            <span class="text-h4 text-md-h3">/</span>
             <a
-              :class="`text-h3 ml-5 ${category === 'artists' ? '' : 'white--text'} `"
+              :class="`text-h4 text-md-h3 ml-5 ${category === 'artists' ? '' : 'white--text'} `"
               v-on:click="switchCategory('artists')"
               >Artists</a
             >
