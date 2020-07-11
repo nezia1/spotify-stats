@@ -5,13 +5,13 @@
         <v-row justify="center" align="center">
           <v-col class="text-center" style="user-select: none;">
             <a
-              :class="`text-h4 text-md-h3  mr-5 ${category === 'tracks' ? '' : 'white--text'}`"
+              :class="`text-h4 text-md-h3  mr-5 ${getBreadcrumbColor('tracks')}`"
               v-on:click="switchCategory('tracks')"
               >Tracks</a
             >
             <span class="text-h4 text-md-h3">/</span>
             <a
-              :class="`text-h4 text-md-h3 ml-5 ${category === 'artists' ? '' : 'white--text'} `"
+              :class="`text-h4 text-md-h3 ml-5 ${getBreadcrumbColor('artists')} `"
               v-on:click="switchCategory('artists')"
               >Artists</a
             >
@@ -72,6 +72,12 @@ export default {
   methods: {
     switchCategory(chosenCategory) {
       this.category = chosenCategory;
+    },
+    getBreadcrumbColor(activeCategory) {
+      if (this.category === activeCategory) {
+        return 'blue-darken-2--text';
+      }
+      return this.$vuetify.theme.dark ? 'white--text' : 'black--text';
     },
   },
   computed: {
