@@ -14,6 +14,6 @@ export default {
     flex-direction: column
     flex: 1 0 0
     height: 70vh
-    overflow: scroll
+    overflow: auto
     overflow-x: hidden
 </style>
