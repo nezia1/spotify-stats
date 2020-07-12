@@ -19,73 +19,17 @@
         </v-row>
       </v-col>
       <v-col cols="12">
-        <v-row v-if="$vuetify.breakpoint.mobile">
-          <v-col class="text-center" cols="12" md="6">
-            <h1>Current</h1>
-            <v-col
-              v-for="topTrack in category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
-              :key="topTrack.id"
-            >
-              <v-lazy>
-                <TopCard
-                  :element="topTrack"
-                  :isTrack="category === 'tracks'"
-                  cardColor="cyan darken-2"
-                />
-              </v-lazy>
-            </v-col>
-          </v-col>
-          <v-col class="text-center" cols="12" md="6">
-            <h1>All time</h1>
-            <v-col
-              v-for="topTrack in category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
-              :key="topTrack.id"
-            >
-              <v-lazy>
-                <TopCard
-                  :element="topTrack"
-                  :isTrack="category === 'tracks'"
-                  cardColor="cyan darken-2"
-                />
-              </v-lazy>
-            </v-col>
-          </v-col>
-        </v-row>
-        <v-row v-else>
-          <v-col class="text-center" cols="12" md="6">
-            <h1>Current</h1>
-            <Scroller>
-              <v-col
-                v-for="topTrack in category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
-                :key="topTrack.id"
-              >
-                <v-lazy>
-                  <TopCard
-                    :element="topTrack"
-                    :isTrack="category === 'tracks'"
-                    cardColor="cyan darken-2"
-                  />
-                </v-lazy>
-              </v-col>
-            </Scroller>
-          </v-col>
-          <v-col class="text-center" cols="12" md="6">
-            <h1>All time</h1>
-            <Scroller>
-              <v-col
-                v-for="topTrack in category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
-                :key="topTrack.id"
-              >
-                <v-lazy>
-                  <TopCard
-                    :element="topTrack"
-                    :isTrack="category === 'tracks'"
-                    cardColor="cyan darken-2"
-                  />
-                </v-lazy>
-              </v-col>
-            </Scroller>
-          </v-col>
+        <v-row>
+          <TopColumn
+            columnName="Current"
+            :isMobile="isMobile"
+            :elements="category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
+          />
+          <TopColumn
+            columnName="All time"
+            :isMobile="isMobile"
+            :elements="category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
+          />
         </v-row>
       </v-col>
     </v-row>
@@ -93,14 +37,12 @@
 </template>
 
 <script>
-import Scroller from '@/components/Scroller.vue';
-import TopCard from '@/components/TopCard.vue';
+import TopColumn from '@/components/TopColumn.vue';
 
 export default {
   name: 'Stats',
   components: {
-    TopCard,
-    Scroller,
+    TopColumn,
   },
   data() {
     return {
