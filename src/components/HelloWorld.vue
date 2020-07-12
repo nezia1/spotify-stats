@@ -19,7 +19,39 @@
         </v-row>
       </v-col>
       <v-col cols="12">
-        <v-row>
+        <v-row v-if="$vuetify.breakpoint.mobile">
+          <v-col class="text-center" cols="12" md="6">
+            <h1>Current</h1>
+            <v-col
+              v-for="topTrack in category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
+              :key="topTrack.id"
+            >
+              <v-lazy>
+                <TopCard
+                  :element="topTrack"
+                  :isTrack="category === 'tracks'"
+                  cardColor="cyan darken-2"
+                />
+              </v-lazy>
+            </v-col>
+          </v-col>
+          <v-col class="text-center" cols="12" md="6">
+            <h1>All time</h1>
+            <v-col
+              v-for="topTrack in category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
+              :key="topTrack.id"
+            >
+              <v-lazy>
+                <TopCard
+                  :element="topTrack"
+                  :isTrack="category === 'tracks'"
+                  cardColor="cyan darken-2"
+                />
+              </v-lazy>
+            </v-col>
+          </v-col>
+        </v-row>
+        <v-row v-else>
           <v-col class="text-center" cols="12" md="6">
             <h1>Current</h1>
             <Scroller>
