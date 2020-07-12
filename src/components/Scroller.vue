@@ -13,7 +13,7 @@ export default {
     display: flex
     flex-direction: column
     flex: 1 0 0
-    height: 70vh
+    height: 69vh
     overflow: auto
     overflow-x: hidden
 </style>
