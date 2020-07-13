@@ -29,7 +29,6 @@
 export default {
   name: 'App',
   async mounted() {
-    this.$vuetify.theme.dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (this.$route.hash) {
       const regexToken = /(?:#access_token=)(?<accessToken>.+?)(?:&.*)/;
       const tokenMatch = regexToken.exec(this.$route.hash);
