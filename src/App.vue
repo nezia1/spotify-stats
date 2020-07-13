@@ -3,10 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title>Spotify Stats</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="!accessToken" color="#1ED760" :href="``" v-on:click="login">
-        <v-icon left>mdi-spotify</v-icon>Login with Spotify
-      </v-btn>
-      <v-row v-else justify="end" align="center">
+      <v-row v-if="accessToken" justify="end" align="center">
         <v-skeleton-loader type="avatar" class="mr-3">
           <v-avatar size="40">
             <img
@@ -17,7 +14,6 @@
             />
           </v-avatar>
         </v-skeleton-loader>
-
         <h3 class="mr-5 font-weight-regular">Welcome, {{ userProfile.display_name }}</h3>
         <v-btn color="primary" v-on:click="logout"> <v-icon left>mdi-logout</v-icon>Logout </v-btn>
       </v-row>
@@ -47,9 +43,6 @@ export default {
       this.$store.commit('logout');
       this.$router.replace('/');
     },
-    login() {
-      window.location.href = `https://accounts.spotify.com/authorize?response_type=token&client_id=${this.clientId}&scope=user-read-private user-top-read&redirect_uri=${this.callbackUrl}&show_dialog=true`;
-    },
     userAvatarExists(profile) {
       return profile?.images?.length > 0 && profile.images[0].url;
     },
@@ -60,14 +53,6 @@ export default {
     },
     userProfile() {
       return this.$store.state.userProfile;
-    },
-    callbackUrl() {
-      return process.env.NODE_ENV === 'production'
-        ? 'https://stats.nezia.xyz'
-        : 'http://localhost:8080';
-    },
-    clientId() {
-      return process.env.VUE_APP_CLIENT_ID;
     },
   },
 };
