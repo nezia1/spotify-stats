@@ -22,12 +22,12 @@
         <v-row>
           <TopColumn
             columnName="Current"
-            :isMobile="isMobile"
+            :isMobile="$vuetify.breakpoint.mobile"
             :elements="category === 'tracks' ? topTracksCurrent : topArtistsCurrent"
           />
           <TopColumn
             columnName="All time"
-            :isMobile="isMobile"
+            :isMobile="$vuetify.breakpoint.mobile"
             :elements="category === 'tracks' ? topTracksAllTime : topArtistsAllTime"
           />
         </v-row>
