@@ -4,9 +4,14 @@
       <v-toolbar-title>Spotify Stats</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-row v-if="accessToken" justify="end" align="center">
-        <v-skeleton-loader type="avatar" class="mr-3" :loading="!userAvatarExists(userProfile)">
+        <v-skeleton-loader type="avatar" class="mr-3" :loading="!userAvatarExists">
           <v-avatar size="40">
-            <img :src="userProfile.images[0].url" :alt="`User profile picture`" srcset />
+            <img
+              v-if="userAvatarExists"
+              :src="userProfile.images[0].url"
+              :alt="`User profile picture`"
+              srcset
+            />
           </v-avatar>
         </v-skeleton-loader>
         <h3 class="mr-5 font-weight-regular">Welcome, {{ userProfile.display_name }}</h3>
@@ -37,9 +42,6 @@ export default {
       this.$store.commit('logout');
       this.$router.replace('/');
     },
-    userAvatarExists(profile) {
-      return profile?.images?.length > 0 && profile.images[0].url;
-    },
   },
   computed: {
     accessToken() {
@@ -47,6 +49,9 @@ export default {
     },
     userProfile() {
       return this.$store.state.userProfile;
+    },
+    userAvatarExists() {
+      return this.userProfile?.images?.length > 0 && this.userProfile.images[0].url;
     },
   },
 };
