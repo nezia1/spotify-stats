@@ -22,45 +22,39 @@
         <v-btn color="primary" v-on:click="logout"> <v-icon left>mdi-logout</v-icon>Logout </v-btn>
       </v-row>
     </v-app-bar>
+    <v-navigation-drawer v-if="$vuetify.breakpoint.mobile" app right v-model="drawer">
+      <v-list>
+        <v-list-item class="mb-2">
+          <v-list-item-avatar>
+            <v-skeleton-loader type="avatar" class="mr-3" :loading="!userAvatarExists">
+              <v-avatar size="40">
+                <img
+                  v-if="userAvatarExists"
+                  :src="userProfile.images[0].url"
+                  :alt="`User profile picture`"
+                  srcset
+                />
+              </v-avatar>
+            </v-skeleton-loader>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>Welcome, {{ userProfile.display_name }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item v-on:click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              Logout
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-main>
-      <v-navigation-drawer
-        v-if="$vuetify.breakpoint.mobile"
-        clipped
-        absolute
-        right
-        v-model="drawer"
-      >
-        <v-list>
-          <v-list-item class="mb-2">
-            <v-list-item-avatar>
-              <v-skeleton-loader type="avatar" class="mr-3" :loading="!userAvatarExists">
-                <v-avatar size="40">
-                  <img
-                    v-if="userAvatarExists"
-                    :src="userProfile.images[0].url"
-                    :alt="`User profile picture`"
-                    srcset
-                  />
-                </v-avatar>
-              </v-skeleton-loader>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>Welcome, {{ userProfile.display_name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-divider></v-divider>
-          <v-list-item v-on:click="logout">
-            <v-list-item-icon>
-              <v-icon>mdi-logout</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                Logout
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
       <router-view />
     </v-main>
   </v-app>
