@@ -4,14 +4,9 @@
       <v-toolbar-title>Spotify Stats</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-row v-if="accessToken" justify="end" align="center">
-        <v-skeleton-loader type="avatar" class="mr-3">
+        <v-skeleton-loader type="avatar" class="mr-3" :loading="!userAvatarExists(userProfile)">
           <v-avatar size="40">
-            <img
-              v-if="userAvatarExists(userProfile)"
-              :src="userProfile.images[0].url"
-              :alt="`User profile picture`"
-              srcset
-            />
+            <img :src="userProfile.images[0].url" :alt="`User profile picture`" srcset />
           </v-avatar>
         </v-skeleton-loader>
         <h3 class="mr-5 font-weight-regular">Welcome, {{ userProfile.display_name }}</h3>
