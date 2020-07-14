@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <v-row align="center" justify="center">
+    <v-row v-if="!hasStartedLoading" align="center" justify="center">
       <v-col cols="12" class="text-center">
         <h1 class="text-md-h2 mb-md-8">Get your favorite tracks and artists.</h1>
       </v-col>
@@ -16,6 +16,9 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-overlay v-else absolute>
+      <v-progress-circular indeterminate size="80"></v-progress-circular>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -28,6 +31,11 @@ export default {
       callbackUrl:
         process.env.NODE_ENV === 'production' ? 'https://stats.nezia.xyz' : 'http://localhost:8080',
     };
+  },
+  computed: {
+    hasStartedLoading() {
+      return this.$store.state.hasStartedLoading;
+    },
   },
   methods: {
     login() {

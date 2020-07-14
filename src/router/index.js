@@ -22,6 +22,7 @@ const routes = [
       if (!store.state.accessToken) {
         next(false);
       } else {
+        store.commit('setLoadingStatus', true);
         await Promise.allSettled([
           store.dispatch('fetchUserProfile'),
           store.dispatch('fetchTop', { type: 'tracks', limit: 20, timeRange: 'short_term' }),

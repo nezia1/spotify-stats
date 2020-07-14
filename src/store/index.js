@@ -10,6 +10,7 @@ const defaultState = {
   userProfile: {},
   topTracksCurrent: [],
   topTracksAllTime: [],
+  hasStartedLoading: false,
 };
 
 export default new Vuex.Store({
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     setTopArtistsAllTime(state, topArtists) {
       state.topArtistsAllTime = topArtists;
+    },
+    setLoadingStatus(state, loadingStatus) {
+      state.hasStartedLoading = loadingStatus;
     },
     logout(state) {
       Object.assign(state, { ...defaultState });
