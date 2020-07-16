@@ -1,5 +1,5 @@
 <template>
-  <div class="scroller"><slot></slot></div>
+  <v-row class="scroller"><slot></slot></v-row>
 </template>
 
 <script>
@@ -8,12 +8,10 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.scroller
-    display: flex
-    flex-direction: column
-    flex: 1 0 0
-    height: 69vh
-    overflow: auto
-    overflow-x: hidden
+<style scoped>
+.scroller {
+  height: 69vh;
+  overflow: auto;
+  overflow-x: hidden;
+}
 </style>

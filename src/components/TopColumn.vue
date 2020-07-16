@@ -10,7 +10,7 @@
   <v-col v-else class="text-center" cols="12" md="6">
     <h1>{{ columnName }}</h1>
     <Scroller>
-      <v-col v-for="element in elements" :key="element.id">
+      <v-col cols="6" v-for="element in elements" :key="element.id">
         <v-lazy>
           <TopCard
             :element="element"
