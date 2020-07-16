@@ -3,7 +3,7 @@
     <h1>{{ columnName }}</h1>
     <v-col v-for="element in elements" :key="element.id">
       <v-lazy>
-        <TopCard :element="element" :isTrack="element.type === 'track'" cardColor="cyan darken-2" />
+        <TopCard :element="element" :isTrack="element.type === 'track'" cardColor="blue" />
       </v-lazy>
     </v-col>
   </v-col>
@@ -15,7 +15,7 @@
           <TopCard
             :element="element"
             :isTrack="element.type === 'track'"
-            cardColor="cyan darken-2"
+            cardColor="blue darken-2"
           />
         </v-lazy>
       </v-col>

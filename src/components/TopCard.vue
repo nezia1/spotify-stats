@@ -1,6 +1,6 @@
 <template>
   <v-card :color="cardColor" class="white--text" height="100%">
-    <v-row>
+    <v-row fill-height align="center" justify="center">
       <v-col cols="5">
         <v-img
           :src="isTrack ? element.album.images[0].url : element.images[0].url"
