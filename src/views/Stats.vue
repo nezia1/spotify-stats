@@ -57,7 +57,7 @@ export default {
       if (this.category === activeCategory) {
         return 'blue-darken-2--text';
       }
-      return this.$vuetify.theme.dark ? 'white--text' : 'black--text';
+      return 'white--text';
     },
   },
   computed: {
