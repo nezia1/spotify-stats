@@ -5,6 +5,7 @@
         <v-img
           :src="isTrack ? element.album.images[0].url : element.images[0].url"
           height="150px"
+          class="ml-5"
           contain
         >
         </v-img>
