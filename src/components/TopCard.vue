@@ -10,7 +10,7 @@
         >
         </v-img>
       </v-col>
-      <v-col cols="7">
+      <v-col cols="4">
         <v-card-title primary-title class="text-left d-block">
           <div>
             <div class="headline text-truncate">{{ element.name }}</div>
@@ -20,6 +20,11 @@
             <div v-if="isTrack">{{ element.album.release_date.split('-')[0] }}</div>
           </div>
         </v-card-title>
+      </v-col>
+      <v-col align-self="end">
+        <v-btn :href="element.uri" icon class="ml-6">
+          <v-icon large>mdi-spotify</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </v-card>
