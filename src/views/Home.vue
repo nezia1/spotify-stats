@@ -29,7 +29,7 @@ export default {
     return {
       clientId: process.env.VUE_APP_CLIENT_ID,
       callbackUrl:
-        process.env.NODE_ENV === 'production' ? 'https://stats.nezia.xyz' : 'http://localhost:8080',
+        process.env.NODE_ENV === 'production' ? 'https://stats.nezia.dev' : 'http://localhost:8080',
     };
   },
   computed: {
