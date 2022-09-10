@@ -1,0 +1,13 @@
+{
+  "projects": {},
+  "targets": {
+    "portfolio-8991e": {
+      "hosting": {
+        "spotify-stats31385a": [
+          "spotify-stats31385a"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
